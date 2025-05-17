@@ -1,0 +1,9 @@
+1) install taiwindCss 
+2) install shadcd
+3) npm install -D @types/node
+4) npx shadcn@latest init
+5) npm install zutand
+6) npm install react-hook-form zod @hookform/resolvers
+7) npm i react-router
+8) npm install react-hot-toast
+9) npm i axios
