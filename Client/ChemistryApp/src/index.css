@@ -1,9 +1,30 @@
 @import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Chemistry custom color palette */
+  --color-Alkali  : #F95F5F;
+  --color-AlkalineEarth : #F4C669;
+  --color-Lanthanide : #FF76A0;
+  --color-Actinide : #B5A7F9;
+  --color-TransitionMetal : #F7AA97;
+  --color-PostTransitionMetal : #4ADDDD;
+  --color-ReactiveMetal : #C5E99B;
+  --color-NobleGas : #80D4F6;
+  --color-Metalloid : #FF8B6C;
+  --color-Unknown : #D8E9EF;
+
+  --color-Primary: #0EA5E9;
+  --color-Secondary: #14B8A6;
+  --color-Accent: #FBBF24;
+  --color-Neutral: #F1F5F9;
+  --color-DarkText: #0F172A;
+  --color-Danger: #EF4444;
+  
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

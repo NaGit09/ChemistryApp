@@ -36,6 +36,17 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
+        String path = request.getRequestURI();
+
+        // Danh sách các path được phép truy cập mà không cần JWT
+        if (path.startsWith("/User")
+                || path.startsWith("/Chemiscals")
+                || path.startsWith("/Experiment")
+                || path.equals("/")) {
+            filterChain.doFilter(request, response); // Bỏ qua xác thực
+            return;
+        }
+
         String token = null;
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
@@ -50,6 +61,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 }
             }
         }
+
         if (token != null) {
             try {
                 if (jwtUtil.validateToken(token)) {
@@ -73,8 +85,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 return;
             }
         }
-        filterChain.doFilter(request, response);
 
+        filterChain.doFilter(request, response);
     }
+
 }
 

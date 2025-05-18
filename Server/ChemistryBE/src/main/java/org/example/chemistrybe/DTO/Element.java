@@ -1,4 +1,4 @@
-package org.example.chemistrybe.Model;
+package org.example.chemistrybe.DTO;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Chemicals {
+public class Element {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,8 +20,4 @@ public class Chemicals {
     private double atomic_weight;
     private String SYMBOL;
     private int type_id;
-    private String hazard_infor ;
-    private String status;
-    private String description;
-    private String image;
 }

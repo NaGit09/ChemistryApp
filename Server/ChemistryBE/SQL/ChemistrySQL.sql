@@ -25,6 +25,7 @@ type_id INT DEFAULT NULL ,
 hazard_infor NVARCHAR(255),
 status NVARCHAR(255),
 description TEXT  DEFAULT NULL , 
+image TEXT DEFAULT NULL , 
 FOREIGN KEY (type_id) REFERENCES Types (id) ON DELETE CASCADE
 );
 
@@ -32,8 +33,6 @@ CREATE TABLE ExperimentCondition (
   id INT PRIMARY KEY AUTO_INCREMENT,
   condition_name NVARCHAR(50)
 );
-
-
 
 
 CREATE TABLE Experiment (
@@ -77,134 +76,108 @@ image TEXT DEFAULT NULL ,
 ('Kim loại yếu', 'Dẫn điện kém hơn kim loại chuyển tiếp'),
 ('Đất hiếm', 'Nguyên tố hiếm, dùng trong công nghiệp'),
 ('Actini', 'Nguyên tố phóng xạ nặng'),
+
 ('Axit', 'Các hợp chất có tính axit, có thể ăn mòn và phản ứng với bazơ'),
 ('Bazơ', 'Các hợp chất có tính kiềm, thường phản ứng với axit để tạo muối và nước'),
 ('Muối', 'Hợp chất được tạo thành từ phản ứng giữa axit và bazơ'),
 ('Hợp chất', 'Các hợp chất hóa học khác không thuộc nhóm trên');
 
 
-INSERT INTO Chemicals (name, atomic_weight, symbol, type_id, hazard_infor, status) VALUES
--- Nhóm Khí hiếm (type_id = 1)
-('Heli', 4.0026, 'He', 1, 'Không độc, không cháy', 'Ổn định'),
-('Neon', 20.180, 'Ne', 1, 'Không độc, không cháy', 'Ổn định'),
-('Argon', 39.948, 'Ar', 1, 'Không độc, không cháy', 'Ổn định'),
-('Krypton', 83.798, 'Kr', 1, 'Không độc, không cháy', 'Ổn định'),
-('Xenon', 131.293, 'Xe', 1, 'Không độc, không cháy', 'Ổn định'),
+INSERT INTO Chemicals (name, atomic_weight, symbol, type_id, hazard_infor, status, description, image)
+VALUES
+-- Khí hiếm (type_id = 1)
+('Helium', 4.0026, 'He', 1, 'An toàn, không phản ứng', 'Còn hàng', 'Khí hiếm không màu, dùng trong làm mát', 'https://upload.wikimedia.org/wikipedia/commons/8/84/Electron_shell_002_Helium_-_no_label.svg'),
+('Neon', 20.180, 'Ne', 1, 'An toàn', 'Còn hàng', 'Khí hiếm dùng trong đèn', 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Electron_shell_010_Neon_-_no_label.svg'),
+('Argon', 39.948, 'Ar', 1, 'An toàn', 'Còn hàng', 'Khí hiếm dùng trong hàn và đèn', 'https://upload.wikimedia.org/wikipedia/commons/5/5c/Electron_shell_018_Argon_-_no_label.svg'),
 
--- Nhóm Kim loại kiềm (type_id = 2)
-('Liti', 6.94, 'Li', 2, 'Phản ứng mạnh với nước', 'Dễ cháy'),
-('Natri', 22.990, 'Na', 2, 'Phản ứng mạnh với nước', 'Dễ cháy'),
-('Kali', 39.098, 'K', 2, 'Phản ứng mạnh với nước', 'Dễ cháy'),
+-- Kim loại kiềm (type_id = 2)
+('Lithium', 6.94, 'Li', 2, 'Phản ứng với nước, dễ cháy', 'Cẩn thận', 'Kim loại nhẹ, dùng trong pin', 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Electron_shell_003_Lithium_-_no_label.svg'),
+('Sodium', 22.990, 'Na', 2, 'Phản ứng mạnh với nước', 'Cẩn thận', 'Kim loại mềm, dẫn điện tốt', 'https://upload.wikimedia.org/wikipedia/commons/8/87/Electron_shell_011_Sodium_-_no_label.svg'),
+('Potassium', 39.098, 'K', 2, 'Phản ứng mạnh với nước', 'Nguy hiểm', 'Kim loại mềm, màu bạc', 'https://upload.wikimedia.org/wikipedia/commons/9/92/Electron_shell_019_Potassium_-_no_label.svg'),
 
--- Nhóm Kim loại kiềm thổ (type_id = 3)
-('Beri', 9.0122, 'Be', 3, 'Độc, có thể gây kích ứng', 'Ổn định'),
-('Magie', 24.305, 'Mg', 3, 'Cháy mạnh khi đốt', 'Ổn định'),
-('Canxi', 40.078, 'Ca', 3, 'Phản ứng nhẹ với nước', 'Ổn định'),
+-- Kim loại kiềm thổ (type_id = 3)
+('Beryllium', 9.0122, 'Be', 3, 'Độc hại khi hít phải', 'Nguy hiểm', 'Kim loại nhẹ, cứng, dùng trong hợp kim', 'https://upload.wikimedia.org/wikipedia/commons/4/40/Electron_shell_004_Beryllium_-_no_label.svg'),
+('Magnesium', 24.305, 'Mg', 3, 'Dễ cháy ở dạng bột', 'Cẩn thận', 'Dùng trong pháo sáng và hợp kim nhẹ', 'https://upload.wikimedia.org/wikipedia/commons/d/d7/Electron_shell_012_Magnesium_-_no_label.svg'),
+('Calcium', 40.078, 'Ca', 3, 'Phản ứng với nước', 'Cẩn thận', 'Kim loại kiềm thổ, cần thiết cho xương', 'https://upload.wikimedia.org/wikipedia/commons/5/57/Electron_shell_020_Calcium_-_no_label.svg'),
 
--- Nhóm Halogen (type_id = 4)
-('Flo', 18.998, 'F', 4, 'Rất độc, ăn mòn', 'Nguy hiểm'),
-('Clo', 35.450, 'Cl', 4, 'Độc, gây kích ứng hô hấp', 'Nguy hiểm'),
-('Brom', 79.904, 'Br', 4, 'Độc, gây kích ứng da', 'Nguy hiểm'),
+-- Halogen (type_id = 4)
+('Fluorine', 18.998, 'F', 4, 'Rất độc, ăn mòn cao', 'Nguy hiểm', 'Halogen mạnh nhất, màu vàng nhạt', 'https://upload.wikimedia.org/wikipedia/commons/b/b5/Electron_shell_009_Fluorine_-_no_label.svg	'),
+('Chlorine', 35.45, 'Cl', 4, 'Khí độc, gây ngạt', 'Nguy hiểm', 'Khí halogen, dùng trong xử lý nước', 'https://upload.wikimedia.org/wikipedia/commons/1/17/Electron_shell_017_Chlorine_-_no_label.svg'),
 
--- Nhóm Kim loại chuyển tiếp (type_id = 5)
-('Sắt', 55.845, 'Fe', 5, 'Không độc', 'Ổn định'),
-('Đồng', 63.546, 'Cu', 5, 'Không độc, có thể gây dị ứng', 'Ổn định'),
-('Kẽm', 65.38, 'Zn', 5, 'Không độc', 'Ổn định'),
-('Vàng', 196.967, 'Au', 5, 'Không độc', 'Ổn định'),
-('Bạc', 107.8682, 'Ag', 5, 'Không độc', 'Ổn định'),
+-- Phi kim (type_id = 6)
+('Hydrogen', 1.008, 'H', 6, 'Dễ cháy nổ khi kết hợp với oxy', 'Còn hàng', 'Nguyên tố nhẹ nhất, phổ biến trong vũ trụ', 'https://upload.wikimedia.org/wikipedia/commons/e/ee/Electron_shell_001_Hydrogen_-_no_label.svg'),
+('Carbon', 12.011, 'C', 6, 'Không độc ở dạng than/kc', 'Còn hàng', 'Nguyên tố cơ bản của sự sống', 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Electron_shell_006_Carbon_-_no_label.svg'),
+('Nitrogen', 14.007, 'N', 6, 'Không độc, nhưng có thể gây ngạt', 'Còn hàng', 'Khí chiếm phần lớn khí quyển', 'https://upload.wikimedia.org/wikipedia/commons/6/69/Electron_shell_007_Nitrogen_-_no_label.svg'),
+('Oxygen', 15.999, 'O', 6, 'Hỗ trợ cháy, không độc', 'Còn hàng', 'Cần thiết cho sự sống', 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Electron_shell_008_Oxygen_-_no_label.svg'),
+('Phosphorus', 30.974, 'P', 6, 'Trắng rất độc, dễ cháy', 'Nguy hiểm', 'Phi kim, cần thiết cho sinh học', 'https://upload.wikimedia.org/wikipedia/commons/0/09/Electron_shell_015_Phosphorus_-_no_label.svg'),
+('Sulfur', 32.06, 'S', 6, 'Gây kích ứng', 'Cẩn thận', 'Chất rắn màu vàng, dùng trong công nghiệp', 'https://upload.wikimedia.org/wikipedia/commons/9/96/Electron_shell_016_Sulfur_-_no_label.svg'),
+('Silicon', 28.085, 'Si', 6, 'Không độc', 'Còn hàng', 'Dùng nhiều trong công nghệ bán dẫn', 'https://upload.wikimedia.org/wikipedia/commons/1/1f/Electron_shell_014_Silicon_-_no_label.svg'),
+('Boron', 10.81, 'B', 6, 'Không độc, nhưng bụi có thể gây hại', 'Còn hàng', 'Phi kim, dùng trong chất bán dẫn', 'https://upload.wikimedia.org/wikipedia/commons/8/89/Electron_shell_005_Boron_-_no_label.svg'),
+('Iron', 55.845, 'Fe', 5, 'Không độc', 'Còn hàng', 'Kim loại phổ biến, dùng làm thép', 'https://upload.wikimedia.org/wikipedia/commons/c/c6/Electron_shell_026_Iron_-_no_label.svg'),
+('Copper', 63.546, 'Cu', 5, 'Không độc', 'Còn hàng', 'Kim loại dẫn điện tốt, màu đỏ nâu', 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Electron_shell_029_Copper_-_no_label.svg'),
+('Zinc', 65.38, 'Zn', 5, 'Không độc', 'Còn hàng', 'Chống ăn mòn, dùng mạ kim loại', 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Electron_shell_030_Zinc_-_no_label.svg'),
+('Nickel', 58.693, 'Ni', 5, 'Có thể gây dị ứng', 'Còn hàng', 'Kim loại bền, chống ăn mòn', 'https://upload.wikimedia.org/wikipedia/commons/d/d2/Electron_shell_028_Nickel_-_no_label.svg'),
+('Chromium', 51.996, 'Cr', 5, 'Một số dạng độc', 'Cẩn thận', 'Tạo độ bóng cho thép không gỉ', 'https://upload.wikimedia.org/wikipedia/commons/6/67/Electron_shell_024_Chromium_-_no_label.svg'),
 
--- Nhóm Phi kim (type_id = 6)
-('Hydro', 1.008, 'H', 6, 'Dễ cháy', 'Dễ cháy'),
-('Carbon', 12.011, 'C', 6, 'Không độc', 'Ổn định'),
-('Oxy', 15.999, 'O', 6, 'Hỗ trợ cháy', 'Ổn định'),
-('Lưu huỳnh', 32.06, 'S', 6, 'Gây kích ứng khi hít phải', 'Ổn định'),
+-- Kim loại yếu (type_id = 7)
+('Aluminum', 26.982, 'Al', 7, 'Không độc', 'Còn hàng', 'Kim loại nhẹ, không gỉ', 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Electron_shell_013_Aluminium_-_no_label.svg'),
+('Lead', 207.2, 'Pb', 7, 'Rất độc nếu hấp thụ lâu dài', 'Nguy hiểm', 'Kim loại nặng, từng dùng trong sơn', 'https://upload.wikimedia.org/wikipedia/commons/7/7d/Electron_shell_082_Lead_-_no_label.svg'),
+('Tin', 118.71, 'Sn', 7, 'Không độc', 'Còn hàng', 'Dùng phủ bảo vệ kim loại khác', 'https://upload.wikimedia.org/wikipedia/commons/1/13/Electron_shell_050_Tin_-_no_label.svg'),
 
--- Nhóm Kim loại yếu (type_id = 7)
-('Nhôm', 26.982, 'Al', 7, 'Không độc', 'Ổn định'),
-('Thiếc', 118.710, 'Sn', 7, 'Không độc', 'Ổn định'),
+-- Đất hiếm (type_id = 8)
 
--- Nhóm Đất hiếm (type_id = 8)
-('Lanthan', 138.905, 'La', 8, 'Không độc', 'Ổn định'),
-('Neodymi', 144.242, 'Nd', 8, 'Không độc', 'Ổn định'),
+('Lanthanum', 138.91, 'La', 8, 'Không độc ở lượng nhỏ', 'Còn hàng', 'Dùng trong pin, xúc tác', 'https://upload.wikimedia.org/wikipedia/commons/1/14/Electron_shell_057_Lanthanum_-_no_label.svg'),
+('Cerium', 140.12, 'Ce', 8, 'Không độc', 'Còn hàng', 'Dùng trong kính và chất xúc tác', 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Electron_shell_058_Cerium_-_no_label.svg'),
+('Neodymium', 144.24, 'Nd', 8, 'Không độc', 'Còn hàng', 'Dùng trong nam châm mạnh', 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Electron_shell_060_Neodymium_-_no_label.svg'),
 
--- Nhóm Actini (type_id = 9)
-('Actini', 227, 'Ac', 9, 'Phóng xạ', 'Nguy hiểm'),
-('Uranium', 238.0289, 'U', 9, 'Phóng xạ', 'Nguy hiểm'),
--- Nhóm hợp chất 
--- Nhóm nước
-('Nước', 18.015, 'H2O', (SELECT id FROM Types WHERE name = 'Hợp chất'), 'Không độc, cần thiết cho sự sống', 'Ổn định'),
+-- Actini (type_id = 9)
 
--- Nhóm Axit
-('Axit Clohidric', 36.46, 'HCl', (SELECT id FROM Types WHERE name = 'Axit'), 'Ăn mòn mạnh, có thể gây bỏng da', 'Ổn định'),
-('Axit Sulfuric', 98.079, 'H2SO4', (SELECT id FROM Types WHERE name = 'Axit'), 'Ăn mòn mạnh, có thể gây bỏng nặng', 'Ổn định'),
-('Axit Nitric', 63.01, 'HNO3', (SELECT id FROM Types WHERE name = 'Axit'), 'Ăn mòn mạnh, gây bỏng hóa học', 'Không ổn định dưới nhiệt độ cao'),
-('Axit Axetic', 60.05, 'CH3COOH', (SELECT id FROM Types WHERE name = 'Axit'), 'Ít độc, có mùi đặc trưng', 'Ổn định'),
-('Axit Photphoric', 97.994, 'H3PO4', (SELECT id FROM Types WHERE name = 'Axit'), 'Ăn mòn nhẹ, có thể gây kích ứng', 'Ổn định'),
+('Uranium', 238.03, 'U', 9, 'Phóng xạ, độc hại', 'Nguy hiểm', 'Dùng trong năng lượng hạt nhân', 'https://upload.wikimedia.org/wikipedia/commons/4/40/Electron_shell_092_Uranium_-_no_label.svg'),
+('Thorium', 232.04, 'Th', 9, 'Phóng xạ yếu', 'Nguy hiểm', 'Tiềm năng trong năng lượng hạt nhân sạch', 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Electron_shell_090_Thorium_-_no_label.svg'),
+('Plutonium', 244, 'Pu', 9, 'Rất phóng xạ, cực độc', 'Nguy hiểm', 'Dùng trong vũ khí và năng lượng hạt nhân', 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Electron_shell_094_Plutonium_-_no_label.svg');
 
--- Nhóm Bazơ
-('Natri Hydroxide', 39.997, 'NaOH', (SELECT id FROM Types WHERE name = 'Bazơ'), 'Ăn mòn mạnh, gây bỏng da', 'Ổn định'),
-('Kali Hydroxide', 56.11, 'KOH', (SELECT id FROM Types WHERE name = 'Bazơ'), 'Ăn mòn mạnh, nguy hiểm khi tiếp xúc', 'Ổn định'),
-
--- Nhóm Muối
-('Natri Clorua', 58.44, 'NaCl', (SELECT id FROM Types WHERE name = 'Muối'), 'Không độc, tan tốt trong nước', 'Ổn định'),
-('Canxi Carbonat', 100.086, 'CaCO3', (SELECT id FROM Types WHERE name = 'Muối'), 'Không độc, tan kém trong nước', 'Ổn định'),
-('Natri Bicarbonat', 84.006, 'NaHCO3', (SELECT id FROM Types WHERE name = 'Muối'), 'Không độc, dùng trong thực phẩm', 'Ổn định'),
-
--- Nhóm Hợp chất khác
-('Amoniac', 17.031, 'NH3', (SELECT id FROM Types WHERE name = 'Hợp chất'), 'Khí độc, gây kích ứng mạnh', 'Không ổn định ở nhiệt độ cao'),
-('Carbon Dioxide', 44.01, 'CO2', (SELECT id FROM Types WHERE name = 'Hợp chất'), 'Không độc ở nồng độ thấp, gây ngạt ở nồng độ cao', 'Ổn định'),
-('Lưu huỳnh Dioxide', 64.07, 'SO2', (SELECT id FROM Types WHERE name = 'Hợp chất'), 'Gây kích ứng mắt và đường hô hấp', 'Không ổn định dưới nhiệt độ cao');
-
-INSERT INTO ExperimentCondition (condition_name) VALUES
-('Nhiệt độ thường'),
+INSERT INTO ExperimentCondition ( description) VALUES
+( 'Nhiệt độ phòng'),
 ('Đun nóng'),
-('Môi trường nước'),
-('Có ánh sáng'),
-('Môi trường axit'),
-('Môi trường kiềm');
+( 'Trong dung dịch nước'),
+( 'Trong không khí'),
+( 'Trong môi trường không có oxy');
 
+-- Phản ứng giữa Na và H2O
+INSERT INTO Experiment (chemical_1, chemical_2, condition_id, description)
+VALUES (1, 23, 3, 'Natri phản ứng với nước tạo ra khí hydro và bazơ');
 
+-- Phản ứng giữa Fe và S
+INSERT INTO Experiment (chemical_1, chemical_2, condition_id, description)
+VALUES (6, 20, 2, 'Sắt phản ứng với lưu huỳnh khi đun nóng tạo FeS');
 
--- Giả sử chemical_1 = Natri (id = 7), chemical_2 = Axit Clohidric (id = 30), condition = 'Nhiệt độ thường' (id = 1)
-INSERT INTO Experiment (chemical_1, chemical_2, condition_id, description) VALUES
-(7, 30, 1, 'Phản ứng giữa Natri và HCl tạo ra khí Hydro và muối Natri Clorua'),
+-- Phản ứng giữa HCl và NaOH
+INSERT INTO Experiment (chemical_1, chemical_2, condition_id, description)
+VALUES (16, 25, 3, 'Phản ứng trung hòa tạo muối và nước');
 
-(6, 32, 1, 'Liti phản ứng với Axit Nitric tạo khí và dung dịch muối'),
+-- Phản ứng giữa H2SO4 và CaCO3
+INSERT INTO Experiment (chemical_1, chemical_2, condition_id, description)
+VALUES (17, 28, 3, 'Phản ứng tạo khí CO₂, muối và nước');
 
-(35, 30, 1, 'Phản ứng trung hòa giữa NaOH và HCl'),
+-- Phản ứng giữa Ba(OH)2 và H2SO4
+INSERT INTO Experiment (chemical_1, chemical_2, condition_id, description)
+VALUES (26, 17, 3, 'Phản ứng tạo kết tủa BaSO₄');
 
-(8, 31, 5, 'Phản ứng giữa Kali và Axit Sulfuric tạo khí Hydro'),
+-- Phản ứng giữa Cu và HNO3
+INSERT INTO Experiment (chemical_1, chemical_2, condition_id, description)
+VALUES (7, 18, 3, 'Đồng bị oxi hóa bởi axit nitric, tạo NO₂');
 
-(36, 31, 2, 'Phản ứng giữa KOH và H2SO4 tạo muối Kali Sulfat'),
+-- Phản ứng giữa CH₄ và O₂
+INSERT INTO Experiment (chemical_1, chemical_2, condition_id, description)
+VALUES (31, 21, 4, 'Đốt cháy methane tạo CO₂ và H₂O');
 
-(30, 2, 1, 'Axit Clohidric không phản ứng với khí hiếm Neon');
--- Experiment ID = 1
-INSERT INTO ExperimentResult (experiment_id, result_text) VALUES
-(1, 'Tỏa nhiệt'),
-(1, 'Tạo khí'),
-(1, 'Dung dịch không màu');
+INSERT INTO ExperimentResult (experiment_id, result_text)
+VALUES
+(1, 'Tạo khí hydro'),
+(2, 'Tạo hợp chất sắt sunfua'),
+(3, 'Tạo muối và nước'),
+(4, 'Tạo CO2 và sủi bọt'),
+(5, 'Kết tủa trắng'),
+(6, 'Tạo khí độc màu nâu'),
+(7, 'Cháy tạo CO2 và nước');
 
--- Experiment ID = 2
-INSERT INTO ExperimentResult (experiment_id, result_text) VALUES
-(2, 'Tạo khí'),
-(2, 'Bong bóng khí nổi');
-
--- Experiment ID = 3
-INSERT INTO ExperimentResult (experiment_id, result_text) VALUES
-(3, 'Phản ứng trung hòa'),
-(3, 'Tạo muối và nước');
-
--- Experiment ID = 4
-INSERT INTO ExperimentResult (experiment_id, result_text) VALUES
-(4, 'Phản ứng mạnh'),
-(4, 'Tỏa nhiệt'),
-(4, 'Tạo khí');
-
--- Experiment ID = 5
-INSERT INTO ExperimentResult (experiment_id, result_text) VALUES
-(5, 'Tỏa nhiệt mạnh'),
-(5, 'Tạo kết tủa trắng');
-
--- Experiment ID = 6
-INSERT INTO ExperimentResult (experiment_id, result_text) VALUES
-(6, 'Không phản ứng');

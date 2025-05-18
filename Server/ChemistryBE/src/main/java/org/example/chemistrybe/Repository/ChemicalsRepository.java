@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface ChemicalsRepository extends JpaRepository<Chemicals, Long> {
     Chemicals findByName(String name);
 
+
 }

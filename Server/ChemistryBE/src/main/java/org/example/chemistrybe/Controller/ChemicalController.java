@@ -1,5 +1,6 @@
 package org.example.chemistrybe.Controller;
 
+import org.example.chemistrybe.DTO.Element;
 import org.example.chemistrybe.Model.Chemicals;
 import org.example.chemistrybe.Service.ChemicalsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,17 @@ public class ChemicalController {
     public List<Chemicals> findAll(){
         return chemicalsService.findAll();
     }
-    @GetMapping("/Chemiscals/{id}")
-    public Chemicals getChemistcalsById(@PathVariable Long id){
-        return chemicalsService.findById(id);
+    @GetMapping("/Chemiscals/{name}")
+    public Chemicals getChemistcalsById(@PathVariable String name){
+        return chemicalsService.findByName(name);
+    }
+    @GetMapping("/Chemiscals/GetAllElements")
+    public List<Element> getAllElement(){
+        return chemicalsService.getAllElement();
+    }
+    @GetMapping("/Chemiscals/GetAllElements/{name}")
+    public Element getAllElement(@PathVariable String name){
+        return chemicalsService.findByNameElement(name);
     }
 
 

@@ -1,19 +1,20 @@
-import './App.css'
-import { Toaster } from 'react-hot-toast'
-import MainLayout from './Layouts/MainLayout'
-import LoginForm from './components/customs/LoginForm'
+import "./App.css";
+import { Toaster } from "react-hot-toast";
+import Routers from "./Routers/Routes";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
-
   return (
-     <>
-     <Toaster position='top-right'/>
-     <MainLayout>
-      <h1>Hello world</h1>
-      <LoginForm />
-     </MainLayout>
-     </>
-      
-  )
+    <>
+      <Router>
+        <Routes>
+          {Routers.map((route) => (
+            <Route path={route.path} element={route.page} />
+          ))}
+        </Routes>
+      </Router>
+      <Toaster position="top-right" />
+    </>
+  );
 }
 
-export default App
+export default App;
