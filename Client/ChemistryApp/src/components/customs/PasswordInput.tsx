@@ -1,6 +1,6 @@
 import { useState } from "react";
-import EyeOnSVG from "../../assets/eye-svgrepo-com.svg";
-import EyeOffSVG from "../../assets/eye-slash-svgrepo-com.svg";
+import EyeOnSVG from "@/assets/eye-svgrepo-com.svg";
+import EyeOffSVG from "@/assets/eye-slash-svgrepo-com.svg";
 interface PasswordInputProps {
   value: string;
   onChange: (value: string) => void;
@@ -13,7 +13,6 @@ export default function PasswordInput({
   placeholder = "Enter your password",
 }: PasswordInputProps) {
   const [show, setShow] = useState(false);
-
 
   return (
     <div className="relative w-full">

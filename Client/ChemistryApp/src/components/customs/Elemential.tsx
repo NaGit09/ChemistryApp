@@ -1,31 +1,11 @@
-const getTypes = (type: number) => {
-  switch (type) {
-    case 1:
-      return "rounded-br-lg"; // Bo tròn góc dưới bên phải
-    case 2:
-      return "clip-polygon"; // Hình polygon custom
-    default:
-      return "";
-  }
-};
-
+import { getTypesElemential } from "@/lib/utils";
+import { Elemential } from "@/Types/Elemential";
 interface ChemiscalProps {
-  type: number;
-  name: string;
-  symbol: string;
-  atomicNumber: number;
-  atomicMass: number;
+  e: Elemential;
   onClick?: () => void;
 }
-const Elemential = ({
-  type,
-  name,
-  symbol,
-  atomicNumber,
-  atomicMass,
-  onClick,
-}: ChemiscalProps) => {
-  const shapeClass = getTypes(type);
+const ElementialCard = ({ e, onClick }: ChemiscalProps) => {
+  const shapeClass = getTypesElemential(e.getTypeId());
 
   return (
     <button
@@ -35,14 +15,14 @@ const Elemential = ({
       <div className="absolute inset-0 border-2 border-Alkali"></div>
       <div className="w-full h-full flex flex-col items-center justify-center p-1 text-Alkali text-[7px] font-semibold">
         <div className="w-full flex items-center justify-between">
-          <span className="text-[8px]">{atomicNumber}</span>
-          <span>{name}</span>
+          <span className="text-[8px]">{e.getAtomicNumber()}</span>
+          <span>{e.getName()}</span>
         </div>
-        <p className="text-3xl font-bold">{symbol}</p>
-        <p className="text-start w-full">{atomicMass}</p>
+        <p className="text-3xl font-bold">{e.getSymbol()}</p>
+        <p className="text-start w-full">{e.getAtomicMass()}</p>
       </div>
     </button>
   );
 };
 
-export default Elemential;
+export default ElementialCard;

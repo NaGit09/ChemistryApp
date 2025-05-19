@@ -5,19 +5,19 @@ import { Chemiscal as ChemiscalType } from "@/Types/Chemiscal";
 import useChemiscalStore from "@/Store/chemiscalStore";
 
 const Chemiscal = () => {
-  const { chemicals , fetchChemicals } = useChemiscalStore();
+  // declare state
+  const { chemicals, fetchChemicals } = useChemiscalStore();
   const [searchText, setSearchText] = useState("");
   const [filteredChemicals, setFilteredChemicals] = useState<ChemiscalType[]>([]);
-
-
-  // Gọi API mỗi lần người dùng thay đổi searchText
+  // Gọi API 1 lần khi component mounted
+  fetchChemicals();
+  // Gọi lọc mỗi khi searchText thay đổi
   useEffect(() => {
-    fetchChemicals();
-    const filteredChemicals = chemicals.filter((chemical) => chemical.getName().includes(searchText));
-    setFilteredChemicals(filteredChemicals);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ searchText]);
-
+    const filtered = chemicals.filter((chemical) =>
+      chemical.getName().toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredChemicals(filtered);
+  }, [filteredChemicals , searchText]);
 
   return (
     <div className="w-full flex flex-col items-center justify-start h-screen p-4 gap-4">
@@ -27,12 +27,12 @@ const Chemiscal = () => {
         }
       />
 
-        <div className="w-full flex flex-wrap gap-4 justify-center items-center">
-        {searchText.length > 0 ? filteredChemicals.map((chemical) => (
-            <ChemiscalCard key={chemical.getId()} chemical={chemical} />
-          )) : chemicals.map((chemical) => (
-            <ChemiscalCard key={chemical.getId()} chemical={chemical} />
-          ))}        
+      <div className="w-full flex flex-wrap gap-4 justify-center items-center">
+        { searchText !== "" ? filteredChemicals.map((chemical) => (
+          <ChemiscalCard key={chemical.getId()} chemical={chemical} />
+        )) : chemicals.map((chemical) => (
+          <ChemiscalCard key={chemical.getId()} chemical={chemical} />
+        ))}
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
 import { create } from "zustand";
-import axiosInstance from "../lib/AxiosInstance";
-import { User } from "../Types/Auth";
+import axiosInstance from "@/lib/AxiosInstance";
+import { IUser } from "@/Types/Auth";
 import toast from "react-hot-toast";
 interface AuthStore {
-  user: User | null;
+  user: IUser | null;
   isAuthenticated: boolean;
-  setUser: (user: User | null) => void;
+  setUser: (user: IUser | null) => void;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   register: (email: string , full_name: string , password: string) => Promise<void>;
@@ -13,7 +13,7 @@ interface AuthStore {
 const useAuthStore = create<AuthStore>(( set) => ({
   user: null,
   isAuthenticated: false,
-  setUser: (user: User | null) => set({ user }),
+  setUser: (user: IUser | null) => set({ user }),
   register: async (email: string , full_name: string , password: string) => {
     try {
       const response = await axiosInstance.post("/User/register", {

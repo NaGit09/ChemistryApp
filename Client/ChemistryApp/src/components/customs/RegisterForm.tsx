@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "../ui/button";
-import useAuthStore from "../../Store/authStore";
+import { Button } from "@/components/ui/button";
+import useAuthStore from "@/Store/authStore";
 import { useNavigate } from "react-router-dom";
 import {
   Form,
@@ -11,10 +11,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
-import PasswordInput from "./PasswordInput";
+import PasswordInput from "@/components/customs/PasswordInput";
 // declare form schema for register
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),

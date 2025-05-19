@@ -1,13 +1,13 @@
 export class Chemiscal {
-    private id : number ;
-    private name : string ;
-    private atomic_weight : number ;
-    private symbol : string ;
-    private type_id : number;
-    private hazard_infor : string ;
-    private status : string;
-    private description : string;
-    private image : string;
+     id : number ;
+     name : string ;
+     atomic_weight : number ;
+     symbol : string ;
+     type_id : number;
+     hazard_infor : string ;
+     status : string;
+     description : string;
+     image : string;
     constructor(id : number , name : string , atomic_weight : number , symbol : string , type_id : number , hazard_infor : string , status : string , description : string , image : string){
         this.id = id ;
         this.name = name ;

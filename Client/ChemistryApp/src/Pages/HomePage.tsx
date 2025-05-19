@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import logo from "../assets/Background.png";
+import logo from "@/assets/Background.png";
 const HomePage = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen relative">

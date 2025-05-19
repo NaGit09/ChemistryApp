@@ -1,4 +1,4 @@
-import { Chemiscal } from "../../Types/Chemiscal";
+import { Chemiscal } from "@/Types/Chemiscal";
 
 interface ChemiscalCardProps {
   chemical: Chemiscal;
