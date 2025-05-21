@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/User")
+//  handle request from a client
 public class AuthController {
     @Autowired
     private AuthService authService;
@@ -23,11 +24,11 @@ public class AuthController {
     public ResponseEntity<Users> createUser(@Valid @RequestBody Users user) {
         return ResponseEntity.ok(authService.createUser(user));
     }
-
+    // 1) get body from a client request
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody Users user) {
         try {
-//            Create a cookie sent to a client
+            //2) call login in service
             String token = authService.login(user.getEmail(), user.getPassword_hash());
             ResponseCookie cookie =ResponseCookie.from("token", token)
                     .httpOnly(true)
@@ -36,8 +37,10 @@ public class AuthController {
                     .maxAge(3600)
                     .sameSite("Strict")
                     .build();
+            // send token from server to client
             return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body("Login successful");
         } catch (Exception e) {
+            // 5) incorrect information
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

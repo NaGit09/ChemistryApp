@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Data
+// Mapping to users' table in db
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Service
 @CrossOrigin(origins = "*", maxAge = 3600)
+// handle when ever controller receive a request from a client
 public class AuthService {
 
     @Autowired
@@ -33,13 +34,16 @@ public class AuthService {
     }
 
     public String login(String email, String password) {
+        // 3) validation and check information from a database
         Users user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Email not found"));
-
+                .orElseThrow(() ->
+                        // 4) not found user in database
+                        new UsernameNotFoundException("Email not found"));
+        // 7) found and check password from a database
         if (!passwordEncoder.matches(password, user.getPassword_hash())) {
             throw new BadCredentialsException("Invalid password");
         }
-
+        //8) generate token
         return jwtUtil.generateToken(user.getEmail());
     }
 }

@@ -17,7 +17,7 @@ const Chemiscal = () => {
       chemical.getName().toLowerCase().includes(searchText.toLowerCase())
     );
     setFilteredChemicals(filtered);
-  }, [filteredChemicals , searchText]);
+  }, [ searchText]);
 
   return (
     <div className="w-full flex flex-col items-center justify-start h-screen p-4 gap-4">

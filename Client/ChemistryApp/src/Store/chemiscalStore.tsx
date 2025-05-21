@@ -27,6 +27,7 @@ const useChemiscalStore = create<ChemiscalStore>((set) => ({
               item.image
             )
         );
+        console.log(`chemicals: ${chemicals}`);
         set({ chemicals });
       })
       .catch((error) => {
