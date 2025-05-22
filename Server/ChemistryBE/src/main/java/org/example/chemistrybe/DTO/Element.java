@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Element {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String name;
     private double atomic_weight;
     private String SYMBOL;

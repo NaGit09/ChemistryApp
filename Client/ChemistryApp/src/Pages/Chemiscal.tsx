@@ -8,16 +8,22 @@ const Chemiscal = () => {
   // declare state
   const { chemicals, fetchChemicals } = useChemiscalStore();
   const [searchText, setSearchText] = useState("");
-  const [filteredChemicals, setFilteredChemicals] = useState<ChemiscalType[]>([]);
+  const [filteredChemicals, setFilteredChemicals] = useState<ChemiscalType[]>(
+    []
+  );
   // Gọi API 1 lần khi component mounted
-  fetchChemicals();
-  // Gọi lọc mỗi khi searchText thay đổi
+  // Gọi 1 lần khi component mount
+  useEffect(() => {
+    fetchChemicals();
+  }, []);
+
+  // Gọi mỗi khi searchText hoặc chemicals thay đổi
   useEffect(() => {
     const filtered = chemicals.filter((chemical) =>
       chemical.getName().toLowerCase().includes(searchText.toLowerCase())
     );
     setFilteredChemicals(filtered);
-  }, [ searchText]);
+  }, [chemicals, searchText]);
 
   return (
     <div className="w-full flex flex-col items-center justify-start h-screen p-4 gap-4">
@@ -28,11 +34,13 @@ const Chemiscal = () => {
       />
 
       <div className="w-full flex flex-wrap gap-4 justify-center items-center">
-        { searchText !== "" ? filteredChemicals.map((chemical) => (
-          <ChemiscalCard key={chemical.getId()} chemical={chemical} />
-        )) : chemicals.map((chemical) => (
-          <ChemiscalCard key={chemical.getId()} chemical={chemical} />
-        ))}
+        {searchText !== ""
+          ? filteredChemicals.map((chemical) => (
+              <ChemiscalCard key={chemical.getId()} chemical={chemical} />
+            ))
+          : chemicals.map((chemical) => (
+              <ChemiscalCard key={chemical.getId()} chemical={chemical} />
+            ))}
       </div>
     </div>
   );

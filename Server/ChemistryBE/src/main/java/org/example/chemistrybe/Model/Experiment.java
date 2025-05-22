@@ -13,15 +13,21 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Experiment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    private Integer chemical_1;
-    private Integer chemical_2;
-    private Integer condition_id;
+    @ManyToOne
+    @JoinColumn(name = "chemical_1")
+    private Chemical chemical1;
+
+    @ManyToOne
+    @JoinColumn(name = "chemical_2")
+    private Chemical chemical2;
+
+    @ManyToOne
+    @JoinColumn(name = "condition_id")
+    private ExperimentCondition condition;
+
     private String description;
-    @JsonManagedReference
-    @OneToMany(mappedBy = "experiment", cascade = CascadeType.PERSIST)
-    private List<experimentresult> results;
 }
+

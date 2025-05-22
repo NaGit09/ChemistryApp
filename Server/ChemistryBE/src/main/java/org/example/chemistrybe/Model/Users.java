@@ -25,9 +25,9 @@ public class Users {
     private String full_name;
     @Email(message = "Email invalid")
     private String email;
-    @Size(min = 6 , message = "Password must be at least 6 characters")
+    @Size(min = 6, message = "Password must be at least 6 characters")
     private String password_hash;
-@Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private Role role;
     private LocalDateTime created_at;
 }

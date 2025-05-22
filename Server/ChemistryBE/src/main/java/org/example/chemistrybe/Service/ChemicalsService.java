@@ -1,7 +1,7 @@
 package org.example.chemistrybe.Service;
 
 import org.example.chemistrybe.DTO.Element;
-import org.example.chemistrybe.Model.Chemicals;
+import org.example.chemistrybe.Model.Chemical;
 import org.example.chemistrybe.Repository.ChemicalsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -21,29 +21,30 @@ public class ChemicalsService {
     }
 
     public List<Element> getAllElement() {
-        List<Chemicals> chemicals = chemicalsRepository.findAll();
+        List<Chemical> chemicals = chemicalsRepository.findAll();
         List<Element> result = new ArrayList<>();
-        for (Chemicals chemical : chemicals) {
+        for (Chemical chemical : chemicals) {
             result.add(new Element(
-                    chemical.getId(), chemical.getName(), chemical.getAtomic_weight(), chemical.getSYMBOL(), chemical.getType_id()
-            ));
+                    chemical.getId(), chemical.getName(), chemical.getAtomic_weight(), chemical.getSymbol(), chemical.getType().getId())
+            );
         }
         return result;
     }
 
     public Element findByNameElement(String name) {
-        Chemicals chemicals = chemicalsRepository.findByName(name);
-        return new Element(chemicals.getId(), chemicals.getName(), chemicals.getAtomic_weight(), chemicals.getSYMBOL(), chemicals.getType_id());
+        Chemical Chemical = chemicalsRepository.findByName(name);
+        return new Element(Chemical.getId(), Chemical.getName(), Chemical.getAtomic_weight(), Chemical.getSymbol(), Chemical.getType().getId());
     }
 
-    public List<Chemicals> findAll() {
+    public List<Chemical> findAll() {
         return chemicalsRepository.findAll();
     }
-        public Chemicals findByName (String name) {
+
+    public Chemical findByName(String name) {
         return chemicalsRepository.findByName(name);
     }
 
-    public Chemicals findById(Long id) {
+    public Chemical findById(Long id) {
         return chemicalsRepository.findById(id).orElse(null);
     }
 

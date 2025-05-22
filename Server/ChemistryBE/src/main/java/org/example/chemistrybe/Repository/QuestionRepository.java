@@ -1,12 +1,9 @@
 package org.example.chemistrybe.Repository;
 
-import org.example.chemistrybe.Model.Chemical;
+import org.example.chemistrybe.Model.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ChemicalsRepository extends JpaRepository<Chemical, Long> {
-    Chemical findByName(String name);
-
-
+public interface QuestionRepository extends JpaRepository<Question, Integer> {
 }
