@@ -3,6 +3,7 @@ import ChemiscalCard from "@/components/customs/ChemiscalCard";
 import SearchFild from "@/components/customs/SearchFild";
 import { Chemiscal as ChemiscalType } from "@/Types/Chemiscal";
 import useChemiscalStore from "@/Store/chemiscalStore";
+import Header from "@/components/customs/Header";
 
 const Chemiscal = () => {
   // declare state
@@ -26,14 +27,16 @@ const Chemiscal = () => {
   }, [chemicals, searchText]);
 
   return (
-    <div className="w-full flex flex-col items-center justify-start h-screen p-4 gap-4">
+    <div className="bg-DarkText">
+      <Header/>
+      <div className="w-full flex flex-col items-center h-screen gap-4 ">
       <SearchFild
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setSearchText(e.target.value)
         }
       />
 
-      <div className="w-full flex flex-wrap gap-4 justify-center items-center">
+      <div className="w-full flex flex-wrap gap-4 justify-center items-center bg-DarkText">
         {searchText !== ""
           ? filteredChemicals.map((chemical) => (
               <ChemiscalCard key={chemical.getId()} chemical={chemical} />
@@ -43,6 +46,8 @@ const Chemiscal = () => {
             ))}
       </div>
     </div>
+    </div>
+    
   );
 };
 

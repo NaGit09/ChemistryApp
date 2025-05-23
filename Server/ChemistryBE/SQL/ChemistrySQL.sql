@@ -37,22 +37,15 @@ CREATE TABLE
         FOREIGN KEY (type_id) REFERENCES Types (id) ON DELETE CASCADE
     );
 
-CREATE TABLE
-    ExperimentCondition (
-        id INT PRIMARY KEY AUTO_INCREMENT,
-        condition_name NVARCHAR (50)
-    );
 
 CREATE TABLE
     Experiment (
         id INT PRIMARY KEY AUTO_INCREMENT,
         chemical_1 INT,
         chemical_2 INT,
-        condition_id INT,
         description NVARCHAR (255),
         FOREIGN KEY (chemical_1) REFERENCES Chemicals (id),
-        FOREIGN KEY (chemical_2) REFERENCES Chemicals (id),
-        FOREIGN KEY (condition_id) REFERENCES ExperimentCondition (id)
+        FOREIGN KEY (chemical_2) REFERENCES Chemicals (id)
     );
 
 CREATE TABLE
@@ -224,41 +217,40 @@ VALUES
 ('AgNO3', 169.87, 'AgNO3', (SELECT id FROM Types WHERE name = 'Muối'), 'Có thể ăn mòn, gây kích ứng da', 'Ổn định', 'Dùng trong phản ứng tráng bạc và sản xuất thuốc.',
 2,'https://upload.wikimedia.org/wikipedia/commons/0/02/AgNO3.jpg');
 
-INSERT INTO ExperimentCondition (condition_name)
-VALUES ('Nhiệt độ thường'),
-       ('Đun nóng'),
-       ('Môi trường nước'),
-       ('Có ánh sáng'),
-       ('Môi trường axit'),
-       ('Môi trường kiềm');
-
 -- Giả sử chemical_1 = Natri (id = 7), chemical_2 = Axit Clohidric (id = 30), condition = 'Nhiệt độ thường' (id = 1)
-INSERT INTO Experiment (chemical_1, chemical_2, condition_id, description)
-VALUES
-(1, 2, 1, 'Zn + 2HCl → ZnCl₂ + H₂↑'),
-(3, 4, 2, 'Cu + 2AgNO₃ → Cu(NO₃)₂ + 2Ag↓'),
-(5, 6, 3, 'NaOH + HCl → NaCl + H₂O'),
-(7, 8, 1, 'CaCO₃ → CaO + CO₂↑ (nhiệt phân)'),
-(9, 10, 4, 'BaCl₂ + Na₂SO₄ → BaSO₄↓ + 2NaCl'),
-(11, 12, 1, 'H₂SO₄ + KOH → K₂SO₄ + H₂O'),
-(13, 14, 2, 'Fe²⁺ + KMnO₄ + H⁺ → Fe³⁺ + Mn²⁺ + H₂O'),
-(15, 16, 3, '2Al + Fe₂O₃ → 2Fe + Al₂O₃ (phản ứng nhiệt nhôm)'),
-(17, 18, 1, 'Na₂CO₃ + CaCl₂ → CaCO₃↓ + 2NaCl'),
-(19, 20, 4, 'CH₄ + 2O₂ → CO₂ + 2H₂O'),
-(21, 22, 2, 'Cr³⁺ + NaOH → Cr(OH)₃ (kết tủa xanh lục)'),
-(23, 24, 3, 'FeS + 2HCl → FeCl₂ + H₂S↑'),
-(25, 26, 1, 'R-CHO + 2[Ag(NH₃)₂]⁺ + 3OH⁻ → R-COO⁻ + 2Ag↓ + 2H₂O + 4NH₃'),
-(27, 28, 2, 'MnO₄⁻ + 8H⁺ + 5Fe²⁺ → Mn²⁺ + 5Fe³⁺ + 4H₂O'),
-(29, 30, 3, 'KI + Pb(NO₃)₂ → PbI₂↓ + 2KNO₃'),
-(31, 32, 1, 'AgNO₃ + NaCl → AgCl↓ + NaNO₃'),
-(33, 34, 2, 'CuSO₄ + NaOH → Cu(OH)₂↓ (xanh lam)'),
-(35, 36, 4, 'S + O₂ → SO₂ (khí độc)'),
-(37, 38, 1, '4Fe²⁺ + O₂ + 4H⁺ → 4Fe³⁺ + 2H₂O'),
-(39, 40, 3, 'Na₂SiO₃ + H₂O → NaOH + H₂SiO₃'),
-(41, 42, 1, 'NH₄Cl + Ca(OH)₂ → NH₃↑ + CaCl₂ + H₂O'),
-(43, 44, 4, 'Na₂SO₃ + H₂SO₄ → Na₂SO₄ + H₂O + SO₂↑'),
-(45, 46, 3, 'H₂S + SO₂ → S↓ + H₂O'),
-(47, 48, 2, 'Mg + O₂ → MgO + nhiệt và ánh sáng');
+INSERT INTO Experiment (chemical_1, chemical_2, description) VALUES
+(1, 2, N'Không phản ứng'),
+(5, 11, N'NaCl'),
+(12, 15, N'H₂O'),
+(35, 40, N'NaCl'),
+(48, 42, N'AgCl'),
+
+(3, 10, N'Không phản ứng'),
+(4, 5, N'Hợp kim Li-Na'),
+(6, 7, N'Hợp kim K-Be'),
+(8, 9, N'Hợp kim Mg-Ca'),
+(13, 14, N'CN⁻ hoặc hợp chất hữu cơ'),
+(16, 17, N'PS'),
+(18, 19, N'Hợp kim Si-B'),
+(20, 21, N'Hợp kim Fe-Cu'),
+(22, 23, N'Hợp kim Zn-Ni'),
+(24, 25, N'Hợp kim Cr-Al'),
+(26, 27, N'Hợp kim Pb-Sn'),
+(28, 29, N'Hợp kim La-Ce'),
+(30, 31, N'Hợp chất Nd-U'),
+(32, 33, N'Hợp chất Th-Pu'),
+(34, 35, N'HCl pha loãng'),
+
+(36, 40, N'Na₂SO₄'),
+(37, 41, N'KNO₃'),
+(38, 42, N'Dung dịch axetat + NaCl'),
+(39, 43, N'Ca₃(PO₄)₂'),
+(44, 45, N'Na₂CO₃'),
+(46, 47, N'Không rõ'),
+(2, 48, N'Không phản ứng'),
+(11, 34, N'HCl + HClO'),
+(5, 15, N'Na₂O'),
+(12, 16, N'PH₃');
 
 INSERT INTO question_categories (name) VALUES 
 ('Hóa vô cơ'),
@@ -286,3 +278,522 @@ INSERT INTO answers (question_id, content, is_correct) VALUES
 (LAST_INSERT_ID(), 'KBr', FALSE),
 (LAST_INSERT_ID(), 'KNO₃', FALSE);
 
+-- Câu hỏi 3
+INSERT INTO questions (content, category_id)
+VALUES ('Chất nào sau đây là axit mạnh?', 1);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'HCl', TRUE),
+(LAST_INSERT_ID(), 'CH₃COOH', FALSE),
+(LAST_INSERT_ID(), 'H₂CO₃', FALSE),
+(LAST_INSERT_ID(), 'H₂O', FALSE);
+
+-- Câu hỏi 4
+INSERT INTO questions (content, category_id)
+VALUES ('Phản ứng nào sau đây là phản ứng oxi hóa-khử?', 3);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Zn + 2HCl → ZnCl₂ + H₂↑', TRUE),
+(LAST_INSERT_ID(), 'NaCl + AgNO₃ → AgCl↓ + NaNO₃', FALSE),
+(LAST_INSERT_ID(), 'NaOH + HCl → NaCl + H₂O', FALSE),
+(LAST_INSERT_ID(), 'CaCO₃ → CaO + CO₂↑', FALSE);
+
+-- Câu hỏi 5
+INSERT INTO questions (content, category_id)
+VALUES ('Nguyên tố nào sau đây thuộc nhóm halogen?', 4);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Cl', TRUE),
+(LAST_INSERT_ID(), 'Na', FALSE),
+(LAST_INSERT_ID(), 'Fe', FALSE),
+(LAST_INSERT_ID(), 'Si', FALSE);
+
+-- Câu hỏi 6
+INSERT INTO questions (content, category_id)
+VALUES ('Chất nào sau đây tạo kết tủa trắng với AgNO₃?', 1);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'NaCl', TRUE),
+(LAST_INSERT_ID(), 'KNO₃', FALSE),
+(LAST_INSERT_ID(), 'Na₂SO₄', FALSE),
+(LAST_INSERT_ID(), 'Na₃PO₄', FALSE);
+
+-- Câu hỏi 7
+INSERT INTO questions (content, category_id)
+VALUES ('Phản ứng nào sau đây tạo ra khí CO₂?', 3);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂↑', TRUE),
+(LAST_INSERT_ID(), 'Zn + H₂SO₄ → ZnSO₄ + H₂↑', FALSE),
+(LAST_INSERT_ID(), 'NaOH + HCl → NaCl + H₂O', FALSE),
+(LAST_INSERT_ID(), 'AgNO₃ + NaCl → AgCl↓ + NaNO₃', FALSE);
+
+-- Câu hỏi 8
+INSERT INTO questions (content, category_id)
+VALUES ('Chất nào sau đây là bazơ mạnh?', 1);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'NaOH', TRUE),
+(LAST_INSERT_ID(), 'NH₃', FALSE),
+(LAST_INSERT_ID(), 'Al(OH)₃', FALSE),
+(LAST_INSERT_ID(), 'H₂O', FALSE);
+
+-- Câu hỏi 9
+INSERT INTO questions (content, category_id)
+VALUES ('Phản ứng nào sau đây là phản ứng trao đổi?', 3);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'AgNO₃ + NaCl → AgCl↓ + NaNO₃', TRUE),
+(LAST_INSERT_ID(), 'Zn + 2HCl → ZnCl₂ + H₂↑', FALSE),
+(LAST_INSERT_ID(), 'CH₄ + 2O₂ → CO₂ + 2H₂O', FALSE),
+(LAST_INSERT_ID(), '2H₂O → 2H₂↑ + O₂↑', FALSE);
+
+-- Câu hỏi 10
+INSERT INTO questions (content, category_id)
+VALUES ('Chất nào sau đây là muối tan?', 1);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'NaCl', TRUE),
+(LAST_INSERT_ID(), 'AgCl', FALSE),
+(LAST_INSERT_ID(), 'BaSO₄', FALSE),
+(LAST_INSERT_ID(), 'CaCO₃', FALSE);
+
+-- Câu hỏi 11
+INSERT INTO questions (content, category_id)
+VALUES ('Kim loại nào phản ứng mãnh liệt với nước tạo thành dung dịch kiềm và khí H₂?', 1);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Kali (K)', TRUE),
+(LAST_INSERT_ID(), 'Sắt (Fe)', FALSE),
+(LAST_INSERT_ID(), 'Đồng (Cu)', FALSE),
+(LAST_INSERT_ID(), 'Bạc (Ag)', FALSE);
+
+-- Câu hỏi 12
+INSERT INTO questions (content, category_id)
+VALUES ('Chất nào sau đây là hidrocacbon đơn giản nhất?', 2);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Metan (CH₄)', TRUE),
+(LAST_INSERT_ID(), 'Etanol (C₂H₅OH)', FALSE),
+(LAST_INSERT_ID(), 'Axit axetic (CH₃COOH)', FALSE),
+(LAST_INSERT_ID(), 'Glucose (C₆H₁₂O₆)', FALSE);
+
+-- Câu hỏi 13
+INSERT INTO questions (content, category_id)
+VALUES ('Hiện tượng gì xảy ra khi nhỏ dung dịch NaOH vào dung dịch CuSO₄?', 3);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Xuất hiện kết tủa xanh lam', TRUE),
+(LAST_INSERT_ID(), 'Sủi bọt khí không màu', FALSE),
+(LAST_INSERT_ID(), 'Dung dịch chuyển sang màu hồng', FALSE),
+(LAST_INSERT_ID(), 'Không có hiện tượng gì', FALSE);
+
+-- Câu hỏi 14
+INSERT INTO questions (content, category_id)
+VALUES ('Nguyên tử được cấu tạo bởi các loại hạt nào?', 4);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Proton, neutron và electron', TRUE),
+(LAST_INSERT_ID(), 'Chỉ có proton và electron', FALSE),
+(LAST_INSERT_ID(), 'Chỉ có neutron và electron', FALSE),
+(LAST_INSERT_ID(), 'Photon và electron', FALSE);
+
+-- Câu hỏi 15
+INSERT INTO questions (content, category_id)
+VALUES ('Oxit nào sau đây là oxit axit?', 1);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'SO₂', TRUE),
+(LAST_INSERT_ID(), 'CaO', FALSE),
+(LAST_INSERT_ID(), 'Na₂O', FALSE),
+(LAST_INSERT_ID(), 'Fe₂O₃', FALSE);
+
+-- Câu hỏi 16
+INSERT INTO questions (content, category_id)
+VALUES ('Chất nào sau đây có phản ứng tráng bạc?', 2);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Glucose', TRUE),
+(LAST_INSERT_ID(), 'Etanol', FALSE),
+(LAST_INSERT_ID(), 'Axit axetic', FALSE),
+(LAST_INSERT_ID(), 'Metan', FALSE);
+
+-- Câu hỏi 17
+INSERT INTO questions (content, category_id)
+VALUES ('Phản ứng nào sau đây dùng để điều chế khí O₂ trong phòng thí nghiệm?', 3);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Nhiệt phân KClO₃ với xúc tác MnO₂', TRUE),
+(LAST_INSERT_ID(), 'Cho CaCO₃ tác dụng với HCl', FALSE),
+(LAST_INSERT_ID(), 'Điện phân dung dịch NaCl', FALSE),
+(LAST_INSERT_ID(), 'Nung nóng Cu(NO₃)₂', FALSE);
+
+-- Câu hỏi 18
+INSERT INTO questions (content, category_id)
+VALUES ('Liên kết hóa học giữa các nguyên tử trong phân tử nước là loại liên kết gì?', 4);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Liên kết cộng hóa trị phân cực', TRUE),
+(LAST_INSERT_ID(), 'Liên kết ion', FALSE),
+(LAST_INSERT_ID(), 'Liên kết kim loại', FALSE),
+(LAST_INSERT_ID(), 'Liên kết hydro', FALSE);
+
+-- Câu hỏi 19
+INSERT INTO questions (content, category_id)
+VALUES ('Dung dịch nào sau đây có pH < 7?', 1);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Dung dịch HCl 0.1M', TRUE),
+(LAST_INSERT_ID(), 'Dung dịch NaOH 0.1M', FALSE),
+(LAST_INSERT_ID(), 'Dung dịch NaCl 0.1M', FALSE),
+(LAST_INSERT_ID(), 'Nước cất', FALSE);
+
+-- Câu hỏi 20
+INSERT INTO questions (content, category_id)
+VALUES ('Chất nào sau đây thuộc loại ankan?', 2);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Butan (C₄H₁₀)', TRUE),
+(LAST_INSERT_ID(), 'Etilen (C₂H₄)', FALSE),
+(LAST_INSERT_ID(), 'Axetilen (C₂H₂)', FALSE),
+(LAST_INSERT_ID(), 'Benzen (C₆H₆)', FALSE);
+
+-- Câu hỏi 21
+INSERT INTO questions (content, category_id)
+VALUES ('Kim loại nào dẫn điện tốt nhất?', 1);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Bạc (Ag)', TRUE),
+(LAST_INSERT_ID(), 'Đồng (Cu)', FALSE),
+(LAST_INSERT_ID(), 'Nhôm (Al)', FALSE),
+(LAST_INSERT_ID(), 'Vàng (Au)', FALSE);
+
+-- Câu hỏi 22
+INSERT INTO questions (content, category_id)
+VALUES ('Chất nào sau đây là ancol?', 2);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'C₂H₅OH', TRUE),
+(LAST_INSERT_ID(), 'CH₃COOH', FALSE),
+(LAST_INSERT_ID(), 'C₆H₁₂O₆', FALSE),
+(LAST_INSERT_ID(), 'CH₄', FALSE);
+
+-- Câu hỏi 23
+INSERT INTO questions (content, category_id)
+VALUES ('Phản ứng nào sau đây là phản ứng nhiệt phân?', 3);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), '2KClO₃ → 2KCl + 3O₂', TRUE),
+(LAST_INSERT_ID(), 'Zn + 2HCl → ZnCl₂ + H₂', FALSE),
+(LAST_INSERT_ID(), 'NaOH + HCl → NaCl + H₂O', FALSE),
+(LAST_INSERT_ID(), 'AgNO₃ + NaCl → AgCl + NaNO₃', FALSE);
+
+-- Câu hỏi 24
+INSERT INTO questions (content, category_id)
+VALUES ('Số electron tối đa trong lớp vỏ thứ 2 là bao nhiêu?', 4);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), '8', TRUE),
+(LAST_INSERT_ID(), '2', FALSE),
+(LAST_INSERT_ID(), '18', FALSE),
+(LAST_INSERT_ID(), '32', FALSE);
+
+-- Câu hỏi 25
+INSERT INTO questions (content, category_id)
+VALUES ('Dung dịch làm quỳ tím hóa xanh là:', 1);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'NaOH', TRUE),
+(LAST_INSERT_ID(), 'HCl', FALSE),
+(LAST_INSERT_ID(), 'H₂SO₄', FALSE),
+(LAST_INSERT_ID(), 'NaCl', FALSE);
+
+-- Câu hỏi 26
+INSERT INTO questions (content, category_id)
+VALUES ('Chất nào sau đây có liên kết đôi C=C?', 2);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Etilen (C₂H₄)', TRUE),
+(LAST_INSERT_ID(), 'Metan (CH₄)', FALSE),
+(LAST_INSERT_ID(), 'Axetilen (C₂H₂)', FALSE),
+(LAST_INSERT_ID(), 'Etan (C₂H₆)', FALSE);
+
+-- Câu hỏi 27
+INSERT INTO questions (content, category_id)
+VALUES ('Phản ứng giữa axit và bazơ tạo thành muối và nước được gọi là gì?', 3);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Phản ứng trung hòa', TRUE),
+(LAST_INSERT_ID(), 'Phản ứng oxi hóa-khử', FALSE),
+(LAST_INSERT_ID(), 'Phản ứng thế', FALSE),
+(LAST_INSERT_ID(), 'Phản ứng phân hủy', FALSE);
+
+-- Câu hỏi 28
+INSERT INTO questions (content, category_id)
+VALUES ('Nguyên tố có số hiệu nguyên tử 17 thuộc nhóm nào?', 4);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Nhóm halogen (VIIA)', TRUE),
+(LAST_INSERT_ID(), 'Nhóm kim loại kiềm (IA)', FALSE),
+(LAST_INSERT_ID(), 'Nhóm khí hiếm (VIIIA)', FALSE),
+(LAST_INSERT_ID(), 'Nhóm kim loại kiềm thổ (IIA)', FALSE);
+
+-- Câu hỏi 29
+INSERT INTO questions (content, category_id)
+VALUES ('Oxit nào sau đây tác dụng với nước tạo thành axit?', 1);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'SO₃', TRUE),
+(LAST_INSERT_ID(), 'CaO', FALSE),
+(LAST_INSERT_ID(), 'Na₂O', FALSE),
+(LAST_INSERT_ID(), 'Fe₂O₃', FALSE);
+
+-- Câu hỏi 30
+INSERT INTO questions (content, category_id)
+VALUES ('Chất nào sau đây thuộc loại axit cacboxylic?', 2);
+
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'CH₃COOH', TRUE),
+(LAST_INSERT_ID(), 'C₂H₅OH', FALSE),
+(LAST_INSERT_ID(), 'CH₃CHO', FALSE),
+(LAST_INSERT_ID(), 'C₆H₆', FALSE);
+
+-- Câu 31
+INSERT INTO questions (content, category_id) VALUES ('Kim loại nào nhẹ nhất trong bảng tuần hoàn?', 1);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Liti (Li)', TRUE),
+(LAST_INSERT_ID(), 'Nhôm (Al)', FALSE),
+(LAST_INSERT_ID(), 'Magie (Mg)', FALSE),
+(LAST_INSERT_ID(), 'Natri (Na)', FALSE);
+
+-- Câu 32
+INSERT INTO questions (content, category_id) VALUES ('Khí nào gây ra hiệu ứng nhà kính mạnh nhất?', 1);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'CFC', TRUE),
+(LAST_INSERT_ID(), 'CO₂', FALSE),
+(LAST_INSERT_ID(), 'CH₄', FALSE),
+(LAST_INSERT_ID(), 'N₂O', FALSE);
+
+-- Câu 33
+INSERT INTO questions (content, category_id) VALUES ('Khoáng vật nào là nguồn chính của nhôm?', 1);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Bauxite', TRUE),
+(LAST_INSERT_ID(), 'Hematite', FALSE),
+(LAST_INSERT_ID(), 'Galena', FALSE),
+(LAST_INSERT_ID(), 'Magnetite', FALSE);
+
+-- Câu 34
+INSERT INTO questions (content, category_id) VALUES ('Chất nào sau đây được dùng để khử chua đất?', 1);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'CaO', TRUE),
+(LAST_INSERT_ID(), 'NaCl', FALSE),
+(LAST_INSERT_ID(), 'H₂SO₄', FALSE),
+(LAST_INSERT_ID(), 'KNO₃', FALSE);
+
+-- Câu 35
+INSERT INTO questions (content, category_id) VALUES ('Kim loại nào có nhiệt độ nóng chảy cao nhất?', 1);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Wolfram (W)', TRUE),
+(LAST_INSERT_ID(), 'Sắt (Fe)', FALSE),
+(LAST_INSERT_ID(), 'Đồng (Cu)', FALSE),
+(LAST_INSERT_ID(), 'Vàng (Au)', FALSE);
+
+-- Câu 36
+INSERT INTO questions (content, category_id) VALUES ('Phèn chua có công thức hóa học là gì?', 1);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'KAl(SO₄)₂.12H₂O', TRUE),
+(LAST_INSERT_ID(), 'Na₂CO₃', FALSE),
+(LAST_INSERT_ID(), 'CaSO₄.2H₂O', FALSE),
+(LAST_INSERT_ID(), 'MgSO₄', FALSE);
+
+-- Câu 37
+INSERT INTO questions (content, category_id) VALUES ('Chất nào sau đây không phải là muối?', 1);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'NaOH', TRUE),
+(LAST_INSERT_ID(), 'NaCl', FALSE),
+(LAST_INSERT_ID(), 'CaCO₃', FALSE),
+(LAST_INSERT_ID(), 'KNO₃', FALSE);
+
+-- Câu 38
+INSERT INTO questions (content, category_id) VALUES ('Khí nào được dùng để khử trùng nước sinh hoạt?', 1);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Clo (Cl₂)', TRUE),
+(LAST_INSERT_ID(), 'Oxi (O₂)', FALSE),
+(LAST_INSERT_ID(), 'Nitơ (N₂)', FALSE),
+(LAST_INSERT_ID(), 'CO₂', FALSE);
+
+-- Câu 39
+INSERT INTO questions (content, category_id) VALUES ('Chất nào sau đây có đồng phân hình học?', 2);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'But-2-en', TRUE),
+(LAST_INSERT_ID(), 'Etan', FALSE),
+(LAST_INSERT_ID(), 'Axetilen', FALSE),
+(LAST_INSERT_ID(), 'Metan', FALSE);
+
+-- Câu 40
+INSERT INTO questions (content, category_id) VALUES ('Loại đường nào có trong sữa?', 2);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Lactose', TRUE),
+(LAST_INSERT_ID(), 'Glucose', FALSE),
+(LAST_INSERT_ID(), 'Fructose', FALSE),
+(LAST_INSERT_ID(), 'Sucrose', FALSE);
+
+-- Câu 41
+INSERT INTO questions (content, category_id) VALUES ('Chất béo có đặc điểm gì?', 2);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Không tan trong nước', TRUE),
+(LAST_INSERT_ID(), 'Tan tốt trong nước', FALSE),
+(LAST_INSERT_ID(), 'Là hợp chất vô cơ', FALSE),
+(LAST_INSERT_ID(), 'Có nhiệt độ sôi thấp', FALSE);
+
+-- Câu 42
+INSERT INTO questions (content, category_id) VALUES ('Protein được cấu tạo từ các đơn phân nào?', 2);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Amino acid', TRUE),
+(LAST_INSERT_ID(), 'Glucose', FALSE),
+(LAST_INSERT_ID(), 'Nucleotide', FALSE),
+(LAST_INSERT_ID(), 'Glycerol', FALSE);
+
+-- Câu 43
+INSERT INTO questions (content, category_id) VALUES ('Chất nào sau đây là hydrocarbon thơm?', 2);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Benzen (C₆H₆)', TRUE),
+(LAST_INSERT_ID(), 'Etan (C₂H₆)', FALSE),
+(LAST_INSERT_ID(), 'Axetilen (C₂H₂)', FALSE),
+(LAST_INSERT_ID(), 'Etilen (C₂H₄)', FALSE);
+
+-- Câu 44
+INSERT INTO questions (content, category_id) VALUES ('Phản ứng đặc trưng của anken là gì?', 2);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Phản ứng cộng', TRUE),
+(LAST_INSERT_ID(), 'Phản ứng thế', FALSE),
+(LAST_INSERT_ID(), 'Phản ứng trùng hợp', FALSE),
+(LAST_INSERT_ID(), 'Phản ứng oxi hóa', FALSE);
+
+-- Câu 45
+INSERT INTO questions (content, category_id) VALUES ('Chất nào sau đây là dẫn xuất halogen?', 2);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'CH₃Cl', TRUE),
+(LAST_INSERT_ID(), 'CH₃OH', FALSE),
+(LAST_INSERT_ID(), 'CH₃COOH', FALSE),
+(LAST_INSERT_ID(), 'CH₃CHO', FALSE);
+
+-- Câu 46
+INSERT INTO questions (content, category_id) VALUES ('Polime nào có nguồn gốc tự nhiên?', 2);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Cellulose', TRUE),
+(LAST_INSERT_ID(), 'PVC', FALSE),
+(LAST_INSERT_ID(), 'PE', FALSE),
+(LAST_INSERT_ID(), 'PS', FALSE);
+
+-- Câu 47
+INSERT INTO questions (content, category_id) VALUES ('Phản ứng nào sau đây sinh ra khí clo?', 3);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Điện phân dung dịch NaCl có màng ngăn', TRUE),
+(LAST_INSERT_ID(), 'Nhiệt phân KClO₃', FALSE),
+(LAST_INSERT_ID(), 'Cho Cu tác dụng với HCl', FALSE),
+(LAST_INSERT_ID(), 'Cho NaOH tác dụng với HCl', FALSE);
+
+-- Câu 48
+INSERT INTO questions (content, category_id) VALUES ('Phản ứng giữa kim loại và axit loãng thường sinh ra khí gì?', 3);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'H₂', TRUE),
+(LAST_INSERT_ID(), 'O₂', FALSE),
+(LAST_INSERT_ID(), 'CO₂', FALSE),
+(LAST_INSERT_ID(), 'Cl₂', FALSE);
+
+-- Câu 49
+INSERT INTO questions (content, category_id) VALUES ('Phản ứng nào dùng để nhận biết ion SO₄²⁻?', 3);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Tác dụng với BaCl₂ tạo kết tủa trắng', TRUE),
+ (LAST_INSERT_ID(), 'Tác dụng với NaOH', FALSE),
+(LAST_INSERT_ID(), 'Tác dụng với HCl', FALSE),
+(LAST_INSERT_ID(), 'Tác dụng với AgNO₃', FALSE);
+
+-- Câu 50
+INSERT INTO questions (content, category_id) VALUES ('Phản ứng nào sau đây là phản ứng tỏa nhiệt?', 3);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Đốt cháy than', TRUE),
+(LAST_INSERT_ID(), 'Nhiệt phân CaCO₃', FALSE),
+(LAST_INSERT_ID(), 'Điện phân nước', FALSE),
+(LAST_INSERT_ID(), 'Quang hợp của cây xanh', FALSE);
+
+-- Câu 51
+INSERT INTO questions (content, category_id) VALUES ('Nguyên tử có số proton bằng số gì?', 4);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Số electron', TRUE),
+(LAST_INSERT_ID(), 'Số neutron', FALSE),
+(LAST_INSERT_ID(), 'Số khối', FALSE),
+(LAST_INSERT_ID(), 'Số lớp electron', FALSE);
+
+-- Câu 52
+INSERT INTO questions (content, category_id) VALUES ('Đồng vị là những nguyên tử có cùng số proton nhưng khác số gì?', 4);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Neutron', TRUE),
+(LAST_INSERT_ID(), 'Electron', FALSE),
+(LAST_INSERT_ID(), 'Lớp vỏ', FALSE),
+(LAST_INSERT_ID(), 'Orbital', FALSE);
+
+-- Câu 53
+INSERT INTO questions (content, category_id) VALUES ('Liên kết ion hình thành do hiện tượng gì?', 4);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Cho-nhận electron', TRUE),
+(LAST_INSERT_ID(), 'Chia sẻ electron', FALSE),
+(LAST_INSERT_ID(), 'Tương tác yếu', FALSE),
+(LAST_INSERT_ID(), 'Hút tĩnh điện', FALSE);
+
+-- Câu 54
+INSERT INTO questions (content, category_id) VALUES ('Nguyên tố nào có độ âm điện cao nhất?', 4);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Flo (F)', TRUE),
+(LAST_INSERT_ID(), 'Oxi (O)', FALSE),
+(LAST_INSERT_ID(), 'Nitơ (N)', FALSE),
+(LAST_INSERT_ID(), 'Clo (Cl)', FALSE);
+
+-- Câu 55
+INSERT INTO questions (content, category_id) VALUES ('Cấu hình electron của nguyên tử Na (Z=11) là gì?', 4);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), '1s² 2s² 2p⁶ 3s¹', TRUE),
+(LAST_INSERT_ID(), '1s² 2s² 2p⁶', FALSE),
+(LAST_INSERT_ID(), '1s² 2s² 2p⁶ 3s²', FALSE),
+(LAST_INSERT_ID(), '1s² 2s² 2p⁶ 3s² 3p¹', FALSE);
+
+-- Câu 56
+INSERT INTO questions (content, category_id) VALUES ('Kim loại nào sau đây có tính khử mạnh nhất?', 1);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Kali (K)', TRUE),
+(LAST_INSERT_ID(), 'Natri (Na)', FALSE),
+(LAST_INSERT_ID(), 'Nhôm (Al)', FALSE),
+(LAST_INSERT_ID(), 'Sắt (Fe)', FALSE);
+
+-- Câu 57
+INSERT INTO questions (content, category_id) VALUES ('Dung dịch nào sau đây có pH > 7?', 1);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'KOH 0.1M', TRUE),
+(LAST_INSERT_ID(), 'HCl 0.1M', FALSE),
+(LAST_INSERT_ID(), 'H₂SO₄ 0.1M', FALSE),
+(LAST_INSERT_ID(), 'NaCl 0.1M', FALSE);
+
+-- Câu 58
+INSERT INTO questions (content, category_id) VALUES ('Chất nào sau đây thuộc loại amin?', 2);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'CH₃NH₂', TRUE),
+(LAST_INSERT_ID(), 'CH₃COOH', FALSE),
+(LAST_INSERT_ID(), 'C₂H₅OH', FALSE),
+(LAST_INSERT_ID(), 'CH₃CHO', FALSE);
+
+-- Câu 59
+INSERT INTO questions (content, category_id) VALUES ('Phản ứng nào sau đây dùng để điều chế khí CO₂ trong phòng thí nghiệm?', 3);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂↑', TRUE),
+(LAST_INSERT_ID(), '2KClO₃ → 2KCl + 3O₂↑', FALSE),
+(LAST_INSERT_ID(), 'Zn + H₂SO₄ → ZnSO₄ + H₂↑', FALSE),
+(LAST_INSERT_ID(), 'NH₄Cl + NaOH → NaCl + NH₃↑ + H₂O', FALSE);
+
+-- Câu 60
+INSERT INTO questions (content, category_id) VALUES ('Nguyên tố nào sau đây là kim loại kiềm?', 4);
+INSERT INTO answers (question_id, content, is_correct) VALUES
+(LAST_INSERT_ID(), 'Rubidi (Rb)', TRUE),
+(LAST_INSERT_ID(), 'Nhôm (Al)', FALSE),
+(LAST_INSERT_ID(), 'Kẽm (Zn)', FALSE),
+(LAST_INSERT_ID(), 'Chì (Pb)', FALSE);

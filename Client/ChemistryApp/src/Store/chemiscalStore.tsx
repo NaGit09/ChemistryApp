@@ -11,7 +11,7 @@ const useChemiscalStore = create<ChemiscalStore>((set) => ({
   setChemicals: (chemicals: Chemiscal[]) => set({ chemicals }),
   fetchChemicals: async () => {
     await axiosInstance
-      .get(`/Chemiscals`)
+      .get(`/Chemiscals/`)
       .then((res) => {
         const chemicals = res.data.map(
           (item: Chemiscal) =>

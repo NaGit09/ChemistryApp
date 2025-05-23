@@ -44,7 +44,7 @@ const LoginForm = () => {
   };
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/Chemiscal");
+      navigate("/");
     }
   }, [isAuthenticated, navigate]);
   // render form

@@ -42,7 +42,10 @@ const useAuthStore = create<AuthStore>(( set) => ({
       toast.error("Login failed");
     }
   },
-  logout: () => set({ user: null }),
+  logout: () => {
+    set({ user: null })
+    set({ isAuthenticated: false });
+  },
 }));
 
 export default useAuthStore;
