@@ -3,8 +3,8 @@ import logo from "@/assets/Background.png";
 import Header from "@/components/customs/Header";
 const HomePage = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen relative">
-      <div className="absolute top-0 left-0"><Header/></div>
+    <div className=" h-screen relative">
+      <div className="absolute top-0 left-0 w-full"><Header/></div>
       <img src={logo} alt="logo" className="w-full h-full object-cover" />
       <div className="absolute top-25 left-20">
         <h1 className="text-white text-6xl font-bold">CHEX</h1>

@@ -18,9 +18,7 @@ public class ChemicalController {
         return chemicalsService.findAll();
     }
     @GetMapping("/{id}")
-    public Chemical getChemistcalsById(@PathVariable int id){
-        return chemicalsService.findById(id);
-    }
+    public Chemical getChemistcalsById(@PathVariable int id){return chemicalsService.findById(id);}
     @GetMapping("/{name}")
     public Chemical getChemistcalsById(@PathVariable String name){
         return chemicalsService.findByName(name);
@@ -30,9 +28,7 @@ public class ChemicalController {
         return chemicalsService.getAllElement();
     }
     @GetMapping("/GetAllElements/{name}")
-    public Element getAllElement(@PathVariable String name){
-        return chemicalsService.findByNameElement(name);
-    }
+    public Element getAllElement(@PathVariable String name){return chemicalsService.findByNameElement(name);}
 
 
 }

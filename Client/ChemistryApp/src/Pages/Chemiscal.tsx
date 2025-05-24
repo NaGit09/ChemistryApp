@@ -1,11 +1,12 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import ChemiscalCard from "@/components/customs/ChemiscalCard";
 import SearchFild from "@/components/customs/SearchFild";
-import { Chemiscal as ChemiscalType } from "@/Types/Chemiscal";
-import useChemiscalStore from "@/Store/chemiscalStore";
+import { Chemiscal as ChemiscalType } from "@/types/Chemiscal";
+import useChemiscalStore from "@/store/chemiscalStore";
 import Header from "@/components/customs/Header";
 
-const Chemiscal = () => {
+const Chemiscal =  () => {
   // declare state
   const { chemicals, fetchChemicals } = useChemiscalStore();
   const [searchText, setSearchText] = useState("");
@@ -24,7 +25,7 @@ const Chemiscal = () => {
       chemical.getName().toLowerCase().includes(searchText.toLowerCase())
     );
     setFilteredChemicals(filtered);
-  }, [chemicals, searchText]);
+  }, [ searchText]);
 
   return (
     <div className="bg-DarkText">

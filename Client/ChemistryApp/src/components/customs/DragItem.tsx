@@ -1,4 +1,4 @@
-import { Elemential } from "@/Types/Elemential";
+import { Elemential } from "@/types/Elemential";
 import { useDrag } from "react-dnd";
 import { useRef } from "react";
 import ElementialCard from "./ElementialCard";
@@ -7,7 +7,9 @@ interface DragItemProps {
 }
 
 const DragItem = ({ elemential }: DragItemProps) => {
-    const ref = useRef<HTMLDivElement>(null);
+    // Create a reference to the DOM element for drag-and-drop functionality
+    const ref = useRef<HTMLDivElement>(null); 
+    // useDrag hook from react-dnd to make the item draggable
     const [, dragRef] = useDrag(() => ({
         type: 'ITEM',
         item: elemential,
@@ -15,7 +17,6 @@ const DragItem = ({ elemential }: DragItemProps) => {
             isDragging: !!monitor.isDragging(),
         }),
     }), [elemential]);
-
     dragRef(ref);
     
     return (

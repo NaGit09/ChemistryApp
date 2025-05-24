@@ -1,5 +1,5 @@
 import axiosInstance from "@/lib/AxiosInstance";
-import { Experiment } from "@/Types/Experiment";
+import { Experiment } from "@/types/Experiment";
 import { create } from "zustand";
 interface experimentInterface {
   Experiments: Experiment;

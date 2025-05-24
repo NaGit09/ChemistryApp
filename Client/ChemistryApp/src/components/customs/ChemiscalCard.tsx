@@ -1,4 +1,4 @@
-import { Chemiscal } from "@/Types/Chemiscal";
+import { Chemiscal } from "@/types/Chemiscal";
 
 interface ChemiscalCardProps {
   chemical: Chemiscal;
@@ -6,7 +6,7 @@ interface ChemiscalCardProps {
 
 const ChemiscalCard = ({ chemical }: ChemiscalCardProps) => {
   return (
-    <div className=" w-1/3 flex gap-4 justify-center items-center bg-gray-100 p-4 rounded-lg shadow-md">
+    <div className=" w-1/3 flex gap-4 justify-center items-center bg-gray-100 p-4 rounded-lg">
         <img className="w-50 h-50" src={chemical.getImage()} alt={chemical.getName()} />
        <div className="flex flex-col gap-2">
         <p className="text-lg text-gray-500">Symbol: {chemical.getSymbol()}</p>

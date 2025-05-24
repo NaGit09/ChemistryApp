@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AnswerService {
     @Autowired
-    public AnswesRepository answeRepository;
+    public AnswesRepository answerRepository;
     public Answer getAnswerById(int id){
-        return answeRepository.findById(id).orElse(null);
+        return answerRepository.findById(id).orElse(null);
     }
 }

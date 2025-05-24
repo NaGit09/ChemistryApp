@@ -1,5 +1,5 @@
 import { useDrop } from 'react-dnd';
-import { Elemential } from '@/Types/Elemential';
+import { Elemential } from '@/types/Elemential';
 import { useRef } from 'react';
 
 interface Props {
@@ -22,10 +22,9 @@ export const DropZone: React.FC<Props> = ({ onItemDrop, children }) => {
     return (
         <div
             ref={ref}
-            className={`w-[100px] h-[100px] border-2 border-dashed rounded-lg ${isOver ? 'border-blue-500' : 'border-gray-300'}`}
-            
-        >
-            {children && (children)}
+            className={`w-[100px] h-[100px] border-2 border-dashed rounded-lg
+                 ${isOver ? 'border-blue-500' : 'border-gray-300'}`}
+            >{children && (children)}
         </div>
     );
 };

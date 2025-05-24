@@ -29,6 +29,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Autowired
     private UserRepository userRepository;
+
     // Authentication when ever receive a request
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -39,10 +40,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
 
         // Danh sách các path được phép truy cập mà không cần JWT
-        if (path.startsWith("/User")
-                || path.startsWith("/Chemiscals")
-                || path.startsWith("/Experiment")
-                || path.equals("/")) {
+        if (path.startsWith("/User") || path.equals("/")) {
             filterChain.doFilter(request, response); // Bỏ qua xác thực
             return;
         }
@@ -68,6 +66,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     String email = jwtUtil.extractUsername(token);
                     Users user = userRepository.findByEmail(email)
                             .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                    System.out.println(user);
                     UserDetails userDetails = new org.springframework.security.core.userdetails.User(
                             user.getEmail(),
                             user.getPassword_hash(),

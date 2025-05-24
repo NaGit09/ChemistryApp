@@ -25,7 +25,7 @@ public class AuthController {
     }
     // 1) get body from a client request
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody Users user) {
+    public ResponseEntity<?> login(@Valid @RequestBody Users user)  {
         try {
             //2) call login in service
             String token = authService.login(user.getEmail(), user.getPassword_hash());

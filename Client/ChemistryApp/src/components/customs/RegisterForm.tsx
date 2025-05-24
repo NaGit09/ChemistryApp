@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import useAuthStore from "@/Store/authStore";
+import useAuthStore from "@/store/authStore";
 import { useNavigate } from "react-router-dom";
 import {
   Form,
@@ -56,7 +56,7 @@ const RegisterForm = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" {...field.field} />
+                <Input type="email" placeholder="Enter your email" {...field.field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -69,7 +69,7 @@ const RegisterForm = () => {
             <FormItem>
               <FormLabel>Full Name</FormLabel>
               <FormControl>
-                <Input type="text" {...field.field} />
+                <Input type="text" placeholder="Enter your full name" {...field.field} />
               </FormControl>
               <FormMessage />
             </FormItem>

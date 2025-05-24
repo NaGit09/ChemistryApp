@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import useAuthStore from "@/Store/authStore";
+import useAuthStore from "@/store/authStore";
 import { useNavigate } from "react-router-dom";
 import {
   Form,
@@ -46,6 +46,7 @@ const LoginForm = () => {
     if (isAuthenticated) {
       navigate("/");
     }
+    
   }, [isAuthenticated, navigate]);
   // render form
   return (
@@ -61,7 +62,7 @@ const LoginForm = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" {...field.field} />
+                <Input type="email" placeholder="Enter your email" {...field.field} />
               </FormControl>
               <FormMessage />
             </FormItem>

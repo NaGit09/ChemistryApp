@@ -1,5 +1,5 @@
 import { getTypesElemential } from "@/lib/utils";
-import { Elemential } from "@/Types/Elemential";
+import { Elemential } from "@/types/Elemential";
 interface ChemiscalProps {
   e: Elemential;
   onClick?: () => void;

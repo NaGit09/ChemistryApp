@@ -1,9 +1,9 @@
 import type { ReactNode } from "react"
-import HomePage from '../Pages/HomePage'
-import Experiment from '../Pages/Experiment'
-import Chemiscal from '../Pages/Chemiscal'
-import Login from '../Pages/Login'
-import Register from '../Pages/Register'
+import HomePage from '@/pages/HomePage'
+import Experiment from '@/pages/Experiment'
+import Chemiscal from '@/pages/Chemiscal'
+import Login from '@/pages/Login'
+import Register from '@/pages/Register'
 
 const Routers: { path: string; page: ReactNode }[] = [
   {

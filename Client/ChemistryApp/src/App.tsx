@@ -1,12 +1,11 @@
 import "./App.css";
 import { Toaster } from "react-hot-toast";
-import Routers from "./Routers/Routes";
+import Routers from "@/routes/Routes";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <>
-   
       <Router>
         <Routes>
           {Routers.map((route) => (
