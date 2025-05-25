@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ExperimentRepository   extends JpaRepository<Experiment, Integer> {
-    public Experiment findById(int id);
     @Query("SELECT e FROM Experiment e WHERE " +
             "(e.chemical_1= :id1 AND e.chemical_2 = :id2) OR " +
             "(e.chemical_1= :id2 AND e.chemical_2 = :id1)")

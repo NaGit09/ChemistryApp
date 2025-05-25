@@ -1,6 +1,6 @@
 package org.example.chemistrybe.service;
 
-import org.example.chemistrybe.model.Answer;
+import org.example.chemistrybe.model.answer;
 import org.example.chemistrybe.repository.AnswesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class AnswerService {
     @Autowired
     public AnswesRepository answerRepository;
-    public Answer getAnswerById(int id){
+    public answer getAnswerById(int id){
         return answerRepository.findById(id).orElse(null);
     }
 }

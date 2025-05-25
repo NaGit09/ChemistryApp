@@ -18,7 +18,7 @@ public class Question {
     @JoinColumn(name = "category_id")
     private QuestionCategory category;
     @OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
-    private List<Answer> answers;
+    private List<answer> answers;
 
 }
 

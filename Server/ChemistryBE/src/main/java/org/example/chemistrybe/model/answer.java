@@ -4,7 +4,7 @@ import lombok.Data;
 @Entity
 @Table(name = "answers")
 @Data
-public class Answer {
+public class answer {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

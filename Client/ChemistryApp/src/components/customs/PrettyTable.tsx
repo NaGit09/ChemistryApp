@@ -1,5 +1,4 @@
-import React from 'react'
-import { Elemential } from '@/Types/Elemential'
+import { Elemential } from '@/types/Elemential'
 
 interface PrettyTableProps {
   data: Elemential[],

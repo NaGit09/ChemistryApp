@@ -21,7 +21,7 @@ public class UserAnswer {
 
     @ManyToOne
     @JoinColumn(name = "answer_id")
-    private Answer answer;
+    private answer answer;
 
     private LocalDateTime createdAt;
 }

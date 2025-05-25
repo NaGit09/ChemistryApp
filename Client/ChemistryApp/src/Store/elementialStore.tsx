@@ -1,5 +1,5 @@
 import axiosInstance from "@/lib/AxiosInstance";
-import { Elemential } from "@/Types/Elemential";
+import { Elemential } from "@/types/Elemential";
 import { create } from "zustand";
 // define  interface for the store
 interface elementialStore {

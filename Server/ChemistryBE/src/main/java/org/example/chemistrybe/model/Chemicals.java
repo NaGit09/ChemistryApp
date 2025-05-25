@@ -7,23 +7,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Chemicals")
+@Table(name = "chemicals")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 
-public class Chemical {
+public class Chemicals {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
     private Double atomic_weight;
     private String symbol;
-
-    @ManyToOne
-    @JoinColumn(name = "type_id")
-    private Type type;
+    private Integer type_id;
 
     private String hazard_infor;
     private String status;
