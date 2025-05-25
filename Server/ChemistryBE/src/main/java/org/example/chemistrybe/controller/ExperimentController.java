@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExperimentController {
     @Autowired
     private ExperimentService experiment;
+    //1) get Experiment by id1 , id2
     @GetMapping("/{id1}/{id2}")
     public Experiment getExperiment(@PathVariable int id1 , @PathVariable int id2){
         return experiment.getExperiment(id1 , id2);

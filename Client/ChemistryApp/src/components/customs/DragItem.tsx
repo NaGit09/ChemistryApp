@@ -13,10 +13,12 @@ const DragItem = ({ elemential }: DragItemProps) => {
     const [, dragRef] = useDrag(() => ({
         type: 'ITEM',
         item: elemential,
+        // This function is called when the item is being dragged
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),
     }), [elemential]);
+    
     dragRef(ref);
     
     return (

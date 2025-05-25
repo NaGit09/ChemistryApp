@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class ExperimentService {
     @Autowired
     private ExperimentRepository experimentRepository;
+    // 2 ) get Experiment by id1 , id2
     public Experiment getExperiment(int id1 , int id2){
         return experimentRepository.getExperimentRegardlessOfOrder(id1 , id2);
     }
